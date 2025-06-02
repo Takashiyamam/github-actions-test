@@ -28,11 +28,11 @@ jobs:
     - name: Build
       id: build-image
       run: |
-        IMAGE_URI=test
+        IMAGE_URI=testimage:latest
         docker buildx build -t $IMAGE_URI .
         echo "image_uri=$IMAGE_URI" >> $GITHUB_OUTPUT
-        docker image $IMAGE_URI
-        docker history $IMAGE_URI
+        docker images
+        docker history testimage
 
     # - name: Build by actions script
     #   uses: docker/build-push-action@v6
