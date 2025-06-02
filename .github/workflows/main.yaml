@@ -25,21 +25,24 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
       
-    # - name: Build
-    #   id: build-image
-    #   env:
-    #     IMAGE_TAG: latest
-    #   run: |
-    #     IMAGE_URI=test
-    #     docker build -t $IMAGE_URI .
-    #     echo "image_uri=$IMAGE_URI" >> $GITHUB_OUTPUT 
+    - name: Build
+      id: build-image
+      env:
+        IMAGE_TAG: latest
+      run: |
+        IMAGE_URI=test
+        docker buildx build -t $IMAGE_URI .
+        echo "image_uri=$IMAGE_URI" >> $GITHUB_OUTPUT
+        docker history $IMAGE_URI
 
-    - name: Build by actions script
-      uses: docker/build-push-action@v6
-      with:
-       context: .
-       push: false
-       tags: latest
-       cache-from: type=gha
-       cache-to: type=gha,mode=max
+    # - name: Build by actions script
+    #   uses: docker/build-push-action@v6
+    #   with:
+    #    context: .
+    #    push: false
+    #    tags: latest
+    #    cache-from: type=gha
+    #    cache-to: type=gha,mode=max
 
+        
+     
