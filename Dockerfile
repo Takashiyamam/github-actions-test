@@ -19,6 +19,6 @@ FROM public.ecr.aws/lambda/nodejs:22 AS build
 RUN pwd
 RUN ls -la
 WORKDIR /app
-COPY --from=layer /opt /opt
+COPY --from=layer /opt/extensions /opt/extensions
 RUN pwd
 RUN ls -la
