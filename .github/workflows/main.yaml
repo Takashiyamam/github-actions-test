@@ -25,5 +25,5 @@ jobs:
         IMAGE_TAG: latest
       run: |
         IMAGE_URI=test
-        docker build -t $IMAGE_URI -f docker/app/Dockerfile.lambdalayer .
+        docker build -t $IMAGE_URI .
         echo "image_uri=$IMAGE_URI" >> $GITHUB_OUTPUT 
