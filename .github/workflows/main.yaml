@@ -1,0 +1,29 @@
+name: Push to Amazon ECR for Lambda with layer extension
+ 
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'docs/**'
+      - '.github/workflows/cd_lambda.yaml'
+
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    name: Build and Push
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Build, tag, and push image to Amazon ECR
+      id: build-image
+      env:
+        IMAGE_TAG: latest
+      run: |
+        IMAGE_URI=test
+        docker build -t $IMAGE_URI -f docker/app/Dockerfile.lambdalayer .
+        echo "image_uri=$IMAGE_URI" >> $GITHUB_OUTPUT 
